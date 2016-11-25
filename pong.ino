@@ -1,46 +1,37 @@
-/* Encoder Library - TwoKnobs Example
- * http://www.pjrc.com/teensy/td_libs_Encoder.html
- *
- * This example code is in the public domain.
- */
-
 #include <Encoder.h>
+// source: http://www.pjrc.com/teensy/td_libs_Encoder.html
 
-// Change these pin numbers to the pins connected to your encoder.
-//   Best Performance: both pins have interrupt capability
-//   Good Performance: only the first pin has interrupt capability
-//   Low Performance:  neither pin has interrupt capability
-Encoder knobLeft(5, 6);
-Encoder knobRight(7, 8);
-//   avoid using pins with LEDs attached
+// We're using an arduino leonardo and these pins allow interruptions:
+Encoder knob0(0, 1);
+Encoder knob1(2, 3);
+
 
 void setup() {
-    Serial.begin(9600);
-    Serial.println("TwoKnobs Encoder Test:");
+    Serial.begin(115200);
 }
 
-long positionLeft  = -999;
-long positionRight = -999;
+long pos0 = -999;
+long pos1 = -999;
 
 void loop() {
-    long newLeft, newRight;
-    newLeft = knobLeft.read();
-    newRight = knobRight.read();
-    if (newLeft != positionLeft || newRight != positionRight) {
-        Serial.print("Left = ");
-        Serial.print(newLeft);
-        Serial.print(", Right = ");
-        Serial.print(newRight);
-        Serial.println();
-        positionLeft = newLeft;
-        positionRight = newRight;
+    long newPos0 = knob0.read();
+    long newPos1 = knob1.read();
+
+    if (newPos0 != pos0 || newPos1 != pos1) {
+        Serial.print(newPos0);
+        Serial.print(" ");
+        Serial.println(newPos1);
+
+        pos0 = newPos0;
+        pos1 = newPos1;
     }
+
     // if a character is sent from the serial monitor,
     // reset both back to zero.
     if (Serial.available()) {
         Serial.read();
-        Serial.println("Reset both knobs to zero");
-        knobLeft.write(0);
-        knobRight.write(0);
+        knob0.write(0);
+        knob1.write(0);
     }
 }
+
