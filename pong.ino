@@ -6,9 +6,19 @@
 Encoder knob0(0, 1);
 Encoder knob1(2, 3);
 
+// Emulated GNDs for the leonardo embedded here:
+// http://www.lattepanda.com/wp-content/uploads/2016/06/Pinout-Development-Support.png
+const int GND0 = 7;
+const int GND1 = 9;
+
+// more doc here: http://www.lattepanda.com/docs
 
 void setup() {
     Serial.begin(115200);
+    pinMode(GND0, OUTPUT);
+    pinMode(GND1, OUTPUT);
+    digitalWrite(GND0, 0);
+    digitalWrite(GND1, 0);
 }
 
 long pos0 = -999;
