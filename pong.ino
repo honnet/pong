@@ -1,4 +1,5 @@
-#include <Encoder.h>
+#include "Encoder.h"
+// remove it if you use teensy, it's included and it would conflict
 // source: http://www.pjrc.com/teensy/td_libs_Encoder.html
 
 // We're using an arduino leonardo and these pins allow interruptions:
